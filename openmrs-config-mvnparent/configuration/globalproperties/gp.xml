@@ -1,0 +1,8 @@
+<config>
+  <globalProperties>
+    <globalProperty>
+      <property>emr.radiologyTestOrderType</property>
+      <value>${radiologyTestOrderType_uuid}</value>
+    </globalProperty>
+  </globalProperties>
+</config>

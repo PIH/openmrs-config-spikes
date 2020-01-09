@@ -1,0 +1,100 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.pih.emr</groupId>
+  <artifactId>openmrs-config-mvnchild</artifactId>
+  <name>OpenMRS config child</name>
+  <description>OpenMRS configuration that depends on another one</description>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <developers>
+    <developer>
+      <name>Partners In Health</name>
+    </developer>
+  </developers>
+  <organization>
+    <name>Partners In Health</name>
+    <url>http://www.pih.org</url>
+  </organization>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.pih.emr</groupId>
+      <artifactId>openmrs-config-mvnparent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <type>zip</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-shared-resources</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <outputDirectory>${project.build.directory}/openmrs-config-mvnparent</outputDirectory>
+              <includeGroupIds>${project.groupId}</includeGroupIds>
+              <includeArtifactIds>openmrs-config-mvnparent</includeArtifactIds>
+              <excludeTransitive>true</excludeTransitive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/configuration</outputDirectory>
+              <encoding>UTF-8</encoding>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/openmrs-config-mvnparent</directory>
+                  <filtering>true</filtering>
+                </resource>
+                <resource>
+                  <directory>${basedir}/configuration</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>create-distribution</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/main/assembly/assembly.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
