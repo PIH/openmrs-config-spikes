@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pih.emr</groupId>
-    <artifactId>openmrs-contrib-spikes</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>openmrs-config-spikes</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Spike parent project</name>
     <description>This wouldn't exist in reality, it is only here as a parent maven module for convenience</description>

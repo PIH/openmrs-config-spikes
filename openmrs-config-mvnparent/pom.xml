@@ -8,49 +8,18 @@
   <packaging>pom</packaging>
 
   <build>
-    <filters>
-      <filter>configuration/constants.properties</filter>
-    </filters>
+    <filters><filter>${project.build.directory}/constants.properties</filter></filters>
     <plugins>
       <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.1.0</version>
+        <groupId>org.openmrs.maven.plugins</groupId>
+        <artifactId>openmrs-packager-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
         <executions>
           <execution>
-            <id>copy-resources</id>
-            <phase>process-resources</phase>
+            <phase>generate-resources</phase>
             <goals>
-              <goal>copy-resources</goal>
+              <goal>package-config</goal>
             </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/configuration</outputDirectory>
-              <encoding>UTF-8</encoding>
-              <resources>
-                <resource>
-                  <directory>${basedir}/configuration</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>create-distribution</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <appendAssemblyId>false</appendAssemblyId>
-              <descriptors>
-                <descriptor>src/main/assembly/assembly.xml</descriptor>
-              </descriptors>
-            </configuration>
           </execution>
         </executions>
       </plugin>

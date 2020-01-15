@@ -7,7 +7,6 @@ to structure our configurations, and the mechanisms and tools we want to use to 
 
 1. See README within openmrs-config-mavenparent and openmrs-config-mavenchild
 
-
 ### Other notes
 
 * Standardize on common output/configuration artifact formats and file structures
